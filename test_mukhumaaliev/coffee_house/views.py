@@ -1,6 +1,8 @@
 from django.shortcuts import render
-from .models import CoffeeHouse 
-from django.views.generic import ListView,CreateView,DetailView
+from django.urls import reverse_lazy
+from .models import CoffeeHouse,Owner 
+from django import views
+from django.views.generic import ListView,CreateView,DetailView,UpdateView,DeleteView,FormView
 from .forms import AddCoffeHouseForm
 # Create your views here.
 
@@ -20,4 +22,25 @@ class AddCoffeeHouse(CreateView):
 class CoffeeHouseView(DetailView):
     model = CoffeeHouse
     slug_url_kwarg = 'title'
+
+class CoffeeHouseUpdate(UpdateView):
+    fields = ['all']
+class CoffeeHouseDelete(DeleteView):
+    fields = ['all']
+    success_url = reverse_lazy('coffeehouse_list.html')
+
+
+
+class CoffeeHouseEditDelete(CoffeeHouseUpdate, CoffeeHouseDelete):
+    model = CoffeeHouse
+    template_name = 'coffeehouseeditdelete.html'
+    slug_url_kwarg = 'title'
+
+
+
+def get_owner(request, owner_id):
+    coffeehouse = CoffeeHouse.objects.filter(owner_id= owner_id)
+    owners = Owner.objects.all()
+    owner = Owner.objects.get(pk=owner_id)
+    return render(request, 'coffeehouse_detail.html', {'coffeehouse': coffeehouse, 'owners': owners, 'owner': owner})
     

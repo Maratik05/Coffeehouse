@@ -31,7 +31,11 @@ class CoffeHouseOwner(ListView):
 class EditDeleteOwner(UpdateView,DeleteView):
     model = Owner
     template_name = 'editdeleteowner.html'
-
+    success_url = 'owners/ownersprofile.html'
+    context_object_name = 'owners'
+    
+    def get_queryset(self):
+        return CoffeeHouse.objects.filter(owner_id = self.kwargs['owner_id'])
         
 
 

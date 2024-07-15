@@ -8,7 +8,7 @@
 <body>
     <h3>кофейни принадлежащие вам:</h3>
     {% for item in coffeehouse %}
-        <li>{{item.title}}</li>  
+        <a href="{{ url 'owner_id'}}"><li>{{item.title}}</li></a>
     {% endfor %}
 </body>
 </html>
