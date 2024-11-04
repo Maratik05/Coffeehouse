@@ -4,6 +4,8 @@ from .models import CoffeeHouse,Owner
 from django import views
 from django.views.generic import ListView,CreateView,DetailView,UpdateView,DeleteView,FormView
 from .forms import AddCoffeHouseForm
+from .models import CoffeeHouse
+
 # Create your views here.
 
 
@@ -17,12 +19,8 @@ class AddCoffeeHouse(CreateView):
     form_class = AddCoffeHouseForm
     template_name = 'coffee_house/addcoffeehouse.html'
     context_object_name = 'owners'
+
     
-
-class CoffeeHouseView(DetailView):
-    model = CoffeeHouse
-    slug_url_kwarg = 'title'
-
 class CoffeeHouseUpdate(UpdateView):
     fields = ['all']
 class CoffeeHouseDelete(DeleteView):

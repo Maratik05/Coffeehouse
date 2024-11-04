@@ -6,6 +6,11 @@
     <title>{{ coffeehouse.title }}</title>
 </head>
 <body>
+    <h1>Виды меню:</h1>
+
+    {% for el in menu %}
+        <div>{{ el.name }}</div>
     
+    {% endfor %}
 </body>
 </html>
